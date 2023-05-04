@@ -21,9 +21,9 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-NOTE: if you encounter below error -
+## NOTE: if you encounter below error -
 Error: error:0308010C:digital envelope routines::unsupported
-# in package.json script tag change with below
+*in package.json script tag change with below
 "scripts": {
     "start": "react-scripts --openssl-legacy-provider start"
 }
