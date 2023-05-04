@@ -1,38 +1,75 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { nanoid } from '@reduxjs/toolkit'
+import { sub } from 'date-fns'
 
 export const initialState = [
-  { id: '1', title: 'First Post', content: 'Hello!' },
-  { id: '2', title: 'Second Post', content: 'Welcome!' },
+  {
+    id: nanoid(),
+    title: 'First Post',
+    content: 'Hello!',
+    date: sub(new Date(), { minutes: 10 }).toISOString(),
+    reactions: {
+      thumbsUp: 0,
+      hooray: 0,
+      heart: 0,
+      rocket: 0,
+      eyes: 0,
+    },
+  },
+  {
+    id: nanoid(),
+    title: 'React Redux',
+    content: 'React Redux Essentials !',
+    date: sub(new Date(), { minutes: 5 }).toISOString(),
+    reactions: {
+      thumbsUp: 0,
+      hooray: 0,
+      heart: 0,
+      rocket: 0,
+      eyes: 0,
+    },
+  },
 ]
 
 export const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    postAdded: (state, action) => {
-      state.push(action.payload)
-    },
-
-    prepare(title, content) {
-      return {
-        payload: {
-          id: nanoid(),
-          title,
-          content,
-        },
-      }
+    postAdded: {
+      reducer(state, action) {
+        state.push(action.payload)
+      },
+      prepare(title, content, userId) {
+        return {
+          payload: {
+            id: nanoid(),
+            date: new Date().toISOString(),
+            title,
+            content,
+            user: userId,
+          },
+        }
+      },
     },
     postUpdated: (state, action) => {
       const { id, title, content } = action.payload
+      console.log(state)
       const existingPost = state.find((post) => post.id === id)
       if (existingPost) {
         existingPost.title = title
         existingPost.content = content
       }
     },
+    reactionAdded(state, action) {
+      const { postId, reaction } = action.payload
+      const existingPost = state.find((post) => post.id === postId)
+      if (existingPost) {
+        existingPost.reactions[reaction]++
+      }
+    },
   },
 })
 
-export const { postAdded, postUpdated } = postsSlice.actions
+export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
 
 export default postsSlice.reducer
