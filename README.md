@@ -27,8 +27,8 @@ Error: error:0308010C:digital envelope routines::unsupported
 
 ### in package.json script tag change with below
 
-"scripts": {
-    "start": "react-scripts --openssl-legacy-provider start"
+"scripts": {<br />
+    "start": "react-scripts --openssl-legacy-provider start" <br />
 }
 
 The page will reload if you make edits.<br />
