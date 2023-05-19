@@ -6,8 +6,9 @@ export const initialState = [
   {
     id: nanoid(),
     title: 'First Post',
-    content: 'Hello!',
+    content: 'Hello World!',
     date: sub(new Date(), { minutes: 10 }).toISOString(),
+    user: '1',
     reactions: {
       thumbsUp: 0,
       hooray: 0,
@@ -21,6 +22,7 @@ export const initialState = [
     title: 'React Redux',
     content: 'React Redux Essentials !',
     date: sub(new Date(), { minutes: 5 }).toISOString(),
+    user: '0',
     reactions: {
       thumbsUp: 0,
       hooray: 0,
@@ -60,7 +62,7 @@ export const postsSlice = createSlice({
         existingPost.content = content
       }
     },
-    reactionAdded(state, action) {
+    reactionAdded: (state, action) => {
       const { postId, reaction } = action.payload
       const existingPost = state.find((post) => post.id === postId)
       if (existingPost) {
