@@ -24,12 +24,13 @@ const SinglePostPage = ({ match }) => {
     <section>
       <article className="post">
         <h2>{post.title}</h2>
+
+        <p className="post-content">{post.content}</p>
+        <ReactionButtons post={post} />
         <div>
           <PostAuthor userId={post.user} />
           <TimeAgo timestamp={post.date} />
         </div>
-        <p className="post-content">{post.content}</p>
-        <ReactionButtons post={post} />
         <Link to={`/editPost/${post.id}`} className="button">
           Edit Post
         </Link>
