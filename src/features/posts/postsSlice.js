@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { nanoid } from '@reduxjs/toolkit'
+import { createSlice, nanoid } from '@reduxjs/toolkit'
+
 import { sub } from 'date-fns'
 
 export const initialState = [
