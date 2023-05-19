@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { nanoid } from '@reduxjs/toolkit'
+import { createSlice, nanoid } from '@reduxjs/toolkit'
+
 import { sub } from 'date-fns'
 
 export const initialState = [
@@ -49,6 +49,13 @@ export const postsSlice = createSlice({
             title,
             content,
             user: userId,
+            reactions: {
+              thumbsUp: 0,
+              hooray: 0,
+              heart: 0,
+              rocket: 0,
+              eyes: 0,
+            },
           },
         }
       },
